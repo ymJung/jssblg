@@ -4,12 +4,16 @@ spring:
   datasource:
     url: jdbc:h2:mem:jssblg
     username: sa
-    password: 
+    password: sa
     driver-class-name: org.h2.Driver
   jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
   h2:
     console:
       enabled: true
+  jss:
+    base:
+      url: https://jasoseol.com/recruit/
