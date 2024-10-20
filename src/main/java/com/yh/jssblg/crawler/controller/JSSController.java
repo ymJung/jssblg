@@ -1,9 +1,13 @@
 package com.yh.jssblg.crawler.controller;
 
+import com.yh.jssblg.crawler.model.RecruitJobDTO;
 import com.yh.jssblg.crawler.service.JSSCrawlerService;
 import com.yh.jssblg.crawler.service.RecruitPostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +25,8 @@ public class JSSController {
     @GetMapping("/crawl-and-save")
     public ResponseEntity<String> crawlAndSaveRecruitPosts() {
         try {
-            int savedCount = jssCrawlerService.scrapeAndFilterJobs();
-            return ResponseEntity.ok("Crawling completed. " + savedCount + " posts saved.");
+            List<RecruitJobDTO> savedCount = jssCrawlerService.scrapeAndFilterJobs();
+            return ResponseEntity.ok("Crawling completed. " + savedCount.size() + " posts saved.");
         } catch (Exception e) {
             log.error("Error during crawling and saving: ", e);
             return ResponseEntity.internalServerError().body("An error occurred during the process.");
@@ -30,7 +34,7 @@ public class JSSController {
     }
 
     @GetMapping("/generate-blog-post")
-    public String generateBlogPost() {
-        return recruitPostService.generateBlogPost();
+    public String generateBlogPost(RecruitJobDTO recruitJobDTO) {
+        return recruitPostService.generateBlogPost(recruitJobDTO);
     }
 }
