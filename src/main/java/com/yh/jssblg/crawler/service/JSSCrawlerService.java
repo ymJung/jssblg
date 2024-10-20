@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 @Slf4j
 public class JSSCrawlerService {
-    @Value("${jss.base.url}")
+    @Value("${spring.jss.base.url}")
     private String BASE_URL;
 
 

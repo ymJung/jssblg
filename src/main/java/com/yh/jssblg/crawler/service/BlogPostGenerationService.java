@@ -24,14 +24,16 @@ import com.google.gson.Gson;
 public class BlogPostGenerationService {
     @Value("${openai.api.key}") 
     private String openaiApiKey;
+    @Value("${openai.api.url}")
+    private String openaiApiUrl;
     private Gson gson = new Gson();
 
     public String generateBlogPost(RecruitPostDTO recruitPost) {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("${openai.api.url}"))
+                .uri(URI.create(openaiApiUrl))
                 .header(HttpHeaders.CONTENT_TYPE, "application/json")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer ${openai.api.key}")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + openaiApiKey)
                 .POST(HttpRequest.BodyPublishers.ofString(buildRequestBody(recruitPost)))
                 .build();
 

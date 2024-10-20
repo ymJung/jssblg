@@ -17,3 +17,7 @@ spring:
   jss:
     base:
       url: https://jasoseol.com/recruit/
+
+  
+  config:
+    import: application-openapi.yml
