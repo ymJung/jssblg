@@ -21,3 +21,4 @@ spring:
   
   config:
     import: application-openapi.yml
+
