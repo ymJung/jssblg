@@ -32,6 +32,9 @@ public class JobPostEntity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    private boolean postedToBlog;
+    private String jobTitle;
+    private String jobDescription;
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
