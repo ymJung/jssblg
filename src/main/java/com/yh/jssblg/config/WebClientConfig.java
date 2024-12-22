@@ -9,6 +9,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.theokanning.openai.service.OpenAiService;
+
 import reactor.netty.http.client.HttpClient;
 
 import java.time.Duration;
@@ -37,5 +40,10 @@ public class WebClientConfig {
                 .defaultHeader(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
                 .codecs(configurer -> configurer.defaultCodecs().maxInMemorySize(2 * 1024 * 1024)) // 2MB
                 .build();
+    }
+
+    @Bean
+    public OpenAiService openAiService(ApiConfig apiConfig) {
+        return new OpenAiService(apiConfig.getOpenaiKey());
     }
 }
